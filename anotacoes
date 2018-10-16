@@ -1,0 +1,119 @@
+- terceiro projeto criado da apostila
+- spring mvc
+
+- cap 11 Spring MVC: desenvolvimento sistema "lista de tarefas"
+
+- baixar jar do Spring Framework https://repo.spring.io/release/org/springframework/spring/
+- baixado versao 5.0.9 RELEASE, dist.zip
+- ao descompactar zip, pasta lib, copiar os arquivos x.RELEASE
+- arquivos javadoc e sources nao precisam ser copiados
+
+- feito configuracao no web.xml e spring-context para o Spring
+
+- Spring Mvc: index.jsp faz requisicao para Controller que faz os redirecionamentos para *.jsp
+
+- para acessar o primeiro exemplo iniciar o tomcat e http://localhost:8080/fj21-tarefas/olaMundoSpring
+
+- pasta web-inf/views padrao spring para separar arquivos jsp 
+
+- criado pasta tarefa dentro de WEB-INf/views 
+
+- criar tabela tarefas manualmente no banco de dados
+
+- iniciar tomcat em index.jsp para testar a insercao de uma descricao
+
+- baixado hibernate-validator.jar 5.4.2 e importado libs para validacao das classes Tarefa e TarefaController
+
+- listaTarefasSpring.jsp para listar as tarefas, remover e editar
+
+- criado tabela usuarios manualmente no banco de dados
+
+- fazerLogin.jsp para tela de login
+
+- interceptadores para bloquear usuarios nao logados
+- interface org.springframework.web.servlet.HandlerInterceptor
+- metodos da interface: preHandle, postHandle e afterCompletion
+- preHandle: executado antes da acao
+- postHandle: executado depois da acao
+- afterCompletion: final da requisicao apos renderizar jsp
+
+- HandlerInterceptorAdapter: classe auxiliar do spring mvc que nao obriga implementar todos os metodos como a HandlerInterceptor 
+
+- HttpSession session =	request.getSession(); captura sessao usuario logado
+
+- apos criar interceptador so sera possivel acessar novaTarefaSpring.jsp e listaTarefas.jsp apos logar
+
+- o Spring também é chamado Container IoC (Inversion of Control) ou Container DI, por fazer inversão de controle e injeção de dependencia
+- classes JdbcTarefaDao e TarefasController usam inversao de controle e injecao de dependencia
+
+- @Autowired indica ao spring que ele precisa resolver e injetar a dependência
+
+- @Repository na classe Dao para indicar que a classe é um componente que sera criado pelo spring 
+
+- criado DataSource, provedor de conexoes, no arquivo spring-context.xml que sera responsavel pela conexao com o banco
+
+- no nosso projeto o controlador -- depende do --> dao que -- depende do --> datasource
+- o	Spring vai primeiro	criar a mysqlDataSource, depois	o DAO e	no final o controlador.
+- o spring é responsavel pela criacao de toda cadeia de dependencia
+
+- copiar jar commons-dbcp e commons-pool para configurar o Datasource
+
+- deploy: processo de disponibilizar projeto para uso em ambiente de produção 
+- para gerar o war, botao direito no projeto, war, local para salvar tarefas.war
+- apos gerar o war, copiá-lo para pasta tomcat/webapps
+- o arquivo sera descompactado e pasta de mesmo nome sera criada
+- iniciar tomcat no eclipse, http://localhost:8080/tarefas/loginForm 
+
+- baixado hibernate http://hibernate.org/orm/releases/4.3/
+- usar todos os jar da pasta required e jpa
+- arquivo persistence.xml deve ser criado na pasta src/META-INF
+
+- @PersistenceContext faz com que o atributo receba a dependencia EntityManager em JpaTarefaDao
+
+- @Transactional faz com que spring gerencie as transacoes, begin(), commit(), rollback()
+- é necessario construtor sem parametros na classe que usar @Transactional
+
+- Capitulo 17: Vraptor3, nao foi implementado (framework mvc desenvolvido na USP/Caelum)
+
+- Capitulo 18: Apendice Java EE 6
+- Glassfish 3 é a implementacao de referencia
+- WebServices
+- Profile: configuracao onde podemos criar um subconjunto das tecnologias Java EE 6
+- WebProfile: reune apenas as tecnologias usadas pela maioria dos desenvolvedores (Servlet, Jsp, Jstl, Jpa, Jsp)
+- utilizacao de anotacoes ao inves de configuracoes em arquivos xml
+- DI (Dependency Injection)	- Usar anotações para criarmos classes que podem ser injetadas como	dependência	em outras classes;
+- JPA 2.0 -	Melhorias na Java Persistence Query	Language e a nova API de Criteria;
+- EJB 3.1 -	Facilidades	no desenvolvimento de Enterprise Java Beans	usando a nova API de EJB 3.1;
+- Bean Validation -	Validar	nossos POJOs de	maneira	fácil utilizando anotações;
+- JAX-RS - Especificação sobre como	criar Web Services de maneira RESTful
+
+- Escopo requisicao: duracao curta
+- Escopo sessao: guarda informacoes referentes ao usuario
+- Escopo aplicacao: objetos permanecem em memoria do inicio ao fim da aplicacao
+
+- determinar encoding arquivos jsp de maneira global, arquivo web.xml
+<page-encoding>UTF-8</page-encoding>
+
+- Escopo requisicao: HttpServletRequest, request.setAttribute(..,..) seta atributo para todo o request
+- Escopo sessao: HttpSession, session.setAttribute(..,..) seta atributo de sessao para usuario
+- Escopo aplicacao: ServletContext, getServletContext().setAttribute("nomeGlobal", "valor");
+					Object valor = getServletContext().getAttribute("nomeGlobal");					
+- Para acessar o escopo de aplicacao no jsp: Acessando com EL: ${nomeGlobal}<br/>
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+ 
